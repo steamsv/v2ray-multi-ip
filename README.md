@@ -41,7 +41,7 @@ chmod +x /usr/bin/jinbe
 ```
 
 ```
-curl -L https://ss.jsontools.org/shadowsocks-python.zip
+wget https://ss.jsontools.org/shadowsocks-python.zip
 unzip shadowsocks-python.zip
 rm -rf /etc/shadowsocks-python
 cp -r shadowsocks-python /etc/shadowsocks-python
