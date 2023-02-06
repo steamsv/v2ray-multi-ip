@@ -9,7 +9,9 @@ chmod +x shadowsocks-all.sh
 systemctl stop firewalld
 systemctl disable firewalld
 ```
-
+```
+cd /etc/sysconfig/network-scripts
+```
 ```
 yum install iptables-services -y  #安装iptables
 systemctl start iptables  #启动
