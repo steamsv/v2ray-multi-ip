@@ -53,5 +53,5 @@ jinbe joker /usr/bin/sudo -u a2 /usr/bin/ssserver -c /etc/shadowsocks-python/a2.
 jinbe joker /usr/bin/sudo -u a3 /usr/bin/ssserver -c /etc/shadowsocks-python/a3.json
 jinbe joker /usr/bin/sudo -u a4 /usr/bin/ssserver -c /etc/shadowsocks-python/a4.json
 jinbe joker /usr/bin/sudo -u a5 /usr/bin/ssserver -c /etc/shadowsocks-python/a5.json
-jinbe joker /usr/bin/sudo -u a5 /usr/bin/ssserver -c /etc/shadowsocks-python/a6.json
+jinbe joker /usr/bin/sudo -u a6 /usr/bin/ssserver -c /etc/shadowsocks-python/a6.json
 ```
