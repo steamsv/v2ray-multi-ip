@@ -5,18 +5,9 @@ wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.
 chmod +x shadowsocks-all.sh
 ./shadowsocks-all.sh 2>&1 | tee shadowsocks-all.log
 ```
-
 ```
-dnf install epel-release -y
-dnf install supervisor -y
-systemctl enable supervisord
-systemctl start supervisord
-```
-```
-yum install epel-release -y
-yum install supervisor -y
-systemctl enable supervisord
-systemctl start supervisord
+systemctl stop firewalld
+systemctl disable firewalld
 ```
 
 ```
