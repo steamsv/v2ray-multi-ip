@@ -48,9 +48,10 @@ cp -r shadowsocks-python /etc/shadowsocks-python
 ```
 
 ```
-jinbe joker /usr/bin/sudo -u a1 /usr/bin/v2ray/v2ray run -config /etc/v2ray/config1.json
-jinbe joker /usr/bin/sudo -u a2 /usr/bin/v2ray/v2ray run -config /etc/v2ray/config2.json
-jinbe joker /usr/bin/sudo -u a3 /usr/bin/v2ray/v2ray run -config /etc/v2ray/config3.json
-jinbe joker /usr/bin/sudo -u a4 /usr/bin/v2ray/v2ray run -config /etc/v2ray/config4.json
-jinbe joker /usr/bin/sudo -u a5 /usr/bin/v2ray/v2ray run -config /etc/v2ray/config5.json
+jinbe joker /usr/bin/sudo -u a1 /usr/bin/ssserver -c /etc/shadowsocks-python/a1.json
+jinbe joker /usr/bin/sudo -u a2 /usr/bin/ssserver -c /etc/shadowsocks-python/a2.json
+jinbe joker /usr/bin/sudo -u a3 /usr/bin/ssserver -c /etc/shadowsocks-python/a3.json
+jinbe joker /usr/bin/sudo -u a4 /usr/bin/ssserver -c /etc/shadowsocks-python/a4.json
+jinbe joker /usr/bin/sudo -u a5 /usr/bin/ssserver -c /etc/shadowsocks-python/a5.json
+jinbe joker /usr/bin/sudo -u a5 /usr/bin/ssserver -c /etc/shadowsocks-python/a6.json
 ```
