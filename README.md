@@ -5,6 +5,14 @@ wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.
 chmod +x shadowsocks-all.sh
 ./shadowsocks-all.sh 2>&1 | tee shadowsocks-all.log
 ```
+
+```
+curl -L https://github.com/steamsv/shadowsocks-rust/raw/main/ssserver -o /usr/bin/ssserver
+curl -L https://github.com/steamsv/shadowsocks-rust/raw/main/ssurl -o /usr/bin/ssurl
+chmod +x /usr/bin/ssserver
+chmod +x /usr/bin/ssurl
+```
+
 ```
 systemctl stop firewalld
 systemctl disable firewalld
