@@ -56,6 +56,10 @@ cp -r shadowsocks-python /etc/shadowsocks-python
 ```
 
 ```
+sed -i "s/aes-256-gcm/aes-256-cfb/g" `grep -rl "aes-256-gcm" ./`
+```
+
+```
 jinbe joker /usr/bin/sudo -u a1 /usr/bin/ssserver -c /etc/shadowsocks-python/a1.json
 jinbe joker /usr/bin/sudo -u a2 /usr/bin/ssserver -c /etc/shadowsocks-python/a2.json
 jinbe joker /usr/bin/sudo -u a3 /usr/bin/ssserver -c /etc/shadowsocks-python/a3.json
