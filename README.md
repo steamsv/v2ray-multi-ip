@@ -68,7 +68,11 @@ jinbe joker /usr/bin/sudo -u a5 /usr/bin/ssserver -c /etc/shadowsocks-python/a5.
 jinbe joker /usr/bin/sudo -u a6 /usr/bin/ssserver -c /etc/shadowsocks-python/a6.json
 ```
 
-### 日本
+### 
+```
+ss://YWVzLTI1Ni1nY206ZmdoZmdkaHRk@65.20.72.219:10001#12.4%E5%88%B0%E6%9C%9F%E5%8D%B0%E5%BA%A665.20.72.219
+```
+
 ```
 ssr://NS44LjcxLjEyMToxMDAwMTpvcmlnaW46YWVzLTI1Ni1jZmI6cGxhaW46YUhabVpHZG9kblZtWjNZLz9vYmZzcGFyYW09JnByb3RvcGFyYW09JnJlbWFya3M9NXBlbDVweXMmZ3JvdXA9NXBlbDVweXM
 ```
