@@ -70,7 +70,7 @@ jinbe joker /usr/bin/sudo -u a6 /usr/bin/ssserver -c /etc/shadowsocks-python/a6.
 
 ### 
 ```
-ss://YWVzLTI1Ni1nY206ZmdoZmdkaHRk@65.20.72.219:10001#12.4%E5%88%B0%E6%9C%9F%E5%8D%B0%E5%BA%A665.20.72.219
+ss://YWVzLTI1Ni1nY206aHZmZGdodnVmZ3Y=@139..112:10003#%E5%8D%B0%E5%BA%A6
 ```
 
 ```
