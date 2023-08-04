@@ -1,0 +1,63 @@
+{
+    "inbound": {https://github.com/steamsv/ssduo/tree/main
+        "allocate": {
+            "strategy": "always"
+        },
+        "listen": "0.0.0.0",
+        "port": 8090,
+        "protocol": "vmess",
+        "settings": {
+            "clients": [
+                {
+                    "id": "112a9d28-351f-df4c-7747-9f3e14a9ba12",
+                    "alterId": 0,
+                    "email": "user1@v2ray.com"
+                }
+            ],
+            "udp": true
+        },
+        "sniffing": {
+            "destOverride": [
+                "http",
+                "tls"
+            ],
+            "enabled": true
+        },
+        "streamSettings": {
+            "network": "ws",
+            "security": "auto",
+            "wsSettings": {
+                "connectionReuse": true,
+                "path": "ws"
+            }
+        },
+        "tag": "proxy"
+    },
+    "log": {
+        "access": "none",
+        "error": "none",
+        "loglevel": "none"
+    },
+    "outbound": {
+        "protocol": "freedom"
+    },
+    "outboundDetour": [
+        {
+            "sendThrough": "ip",
+            "protocol": "freedom",
+            "tag": "ip1"
+        }
+    ],
+    "routing": {
+        "domainStrategy": "AsIs",
+        "rules": [
+            {
+                "type": "field",
+                "user": [
+                    "user1@v2ray.com"
+                ],
+                "outboundTag": "ip1"
+            }
+        ]
+    }
+}
