@@ -13,10 +13,10 @@ for ip in $ip_list; do
     i=$((i+1))
     tag="ip"$i""
     uuid=$(uuidgen)
-    user="user"$i"1@v2ray.com
+    user="user"$i"@v2ray.com
     
     data=$(cat /usr/local/etc/v2ray/config.json)
     
-    newdata=$(jq -r --arg ip "$ip" --arg tag "$tag" --arg uuid "$uuid" --arg user "$user" '.inbound.settings.clients += [{"id":$uuid,"alterId":0,"email":$user}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}]' <<< "$data")
+    newdata=$(jq -r --arg ip "$ip" --arg tag "$tag" --arg uuid "$uuid" --arg user "$user" '.inbound.settings.clients += [{"id":$uuid,"alterId":0,"email":$user}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}] | .routing.rules += [{"type":"field","user":[$user],"outboundTag":$tag}]' <<< "$data")
     echo "$newdata" > /usr/local/etc/v2ray/config.json
 done
