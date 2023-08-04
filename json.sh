@@ -13,7 +13,7 @@ for ip in $ip_list; do
     i=$((i+1))
     tag="ip"$i""
     uuid=$(uuidgen)
-    user="user"$i"@v2ray.com
+    user="user"$i"@v2ray.com"
     
     data=$(cat /usr/local/etc/v2ray/config.json)
     
