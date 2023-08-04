@@ -1,5 +1,5 @@
 {
-    "inbound": {https://github.com/steamsv/ssduo/tree/main
+    "inbound":
         "allocate": {
             "strategy": "always"
         },
