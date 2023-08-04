@@ -3,14 +3,12 @@
 # 安装V2ray
 if systemctl status v2ray &> /dev/null; then
     echo "V2ray已经安装"
-    exit 0
 else
     echo "V2ray未安装，将进行安装"
     bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
 
 if hash jq &> /dev/null; then
     echo "jq已经安装"
-    exit 0
 else
     echo "jq未安装，将进行安装"
     yum install jq -y
