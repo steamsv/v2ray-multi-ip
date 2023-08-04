@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 安装V2ray
-bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
+#bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
 
 rm -rf /usr/local/etc/v2ray/config.json
 curl -L https://raw.githubusercontent.com/steamsv/ssduo/main/newconfig.json -o /usr/local/etc/v2ray/config.json
