@@ -1,0 +1,43 @@
+{
+    "inbound": {
+        "allocate": {
+            "strategy": "always"
+        },
+        "listen": "0.0.0.0",
+        "port": 8090,
+        "protocol": "vmess",
+        "settings": {
+            "clients": [],
+            "udp": true
+        },
+        "sniffing": {
+            "destOverride": [
+                "http",
+                "tls"
+            ],
+            "enabled": true
+        },
+        "streamSettings": {
+            "network": "ws",
+            "security": "auto",
+            "wsSettings": {
+                "connectionReuse": true,
+                "path": "ws"
+            }
+        },
+        "tag": "proxy"
+    },
+    "log": {
+        "access": "none",
+        "error": "none",
+        "loglevel": "none"
+    },
+    "outbound": {
+        "protocol": "freedom"
+    },
+    "outboundDetour": [],
+    "routing": {
+        "domainStrategy": "AsIs",
+        "rules": []
+    }
+}
