@@ -12,8 +12,11 @@ ip_list=$(ip addr show|grep inet|grep -v 127.0.0.1|grep -v inet6|sed 's#/.*$##g'
 for ip in $ip_list; do
     i=$((i+1))
     tag="ip"$i""
+    uuid=$(uuidgen)
+    user="user"$i"1@v2ray.com
+    
     data=$(cat /usr/local/etc/v2ray/config.json)
     
-    newdata=$(jq -r --arg ip "$ip" --arg tag "$tag" '.inbound.settings.clients += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}]' <<< "$data")
+    newdata=$(jq -r --arg ip "$ip" --arg tag "$tag" '.inbound.settings.clients += [{"id":$uuid,"alterId":0,"email":$user}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}]' <<< "$data")
     echo "$newdata" > /usr/local/etc/v2ray/config.json
 done
