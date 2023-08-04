@@ -7,6 +7,6 @@ for ip in $ip_list; do
     i=$((i+1))
     tag="ip"$i""
     data=$(cat jsonfile.json)
-    newdata=$(jq -r --arg ip "$ip" --arg tag "$tag" '.outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}]' <<< "$data")
+    newdata=$(jq -r --arg ip "$ip" --arg tag "$tag" '.inbound.settings.clients += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}]' <<< "$data")
     echo "$newdata" > jsonfile.json
 done
