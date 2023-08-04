@@ -24,7 +24,7 @@ if ! curl -L https://raw.githubusercontent.com/steamsv/ssduo/main/newconfig.json
     exit 1
 fi
 # 获取服务器IP地址列表
-ip_list=$(ip addr show | grep 'inet ' | grep -v '127.0.0.1' | awk '{print $2}')
+ip_list=$(ip addr show|grep inet|grep -v 127.0.0.1|grep -v inet6|sed 's#/.*$##g'|awk '{print $2}'|tr -d "addr:")
 # 为每个IP地址添加出站路由
 for ip in $ip_list; do
     i=$((i+1))
