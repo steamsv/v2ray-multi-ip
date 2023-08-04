@@ -1,7 +1,21 @@
 #!/bin/bash
 
 # 安装V2ray
-#bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
+if systemctl status v2ray &> /dev/null; then
+    echo "V2ray已经安装"
+    exit 0
+else
+    echo "V2ray未安装，将进行安装"
+    bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
+fi
+
+if hash jq &> /dev/null; then
+    echo "jq已经安装"
+    exit 0
+else
+    echo "jq未安装，将进行安装"
+    yum install jq -y
+fi
 
 rm -rf /usr/local/etc/v2ray/config.json
 curl -L https://raw.githubusercontent.com/steamsv/ssduo/main/newconfig.json -o /usr/local/etc/v2ray/config.json
