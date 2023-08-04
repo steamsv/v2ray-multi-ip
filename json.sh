@@ -27,10 +27,10 @@ fi
 ip_list=$(ip addr show | grep 'inet ' | grep -v '127.0.0.1' | awk '{print $2}')
 # 为每个IP地址添加出站路由
 for ip in $ip_list; do
-    i=1
-    tag="ip_$i"
+    i=$((i+1))
+    tag="ip"$i""
     uuid=$(uuidgen)
-    user="user_$i@v2ray.com"
+    user="user"$i"@v2ray.com"
     
     data=$(cat /usr/local/etc/v2ray/config.json) || exit 1 # 检查JSON语法是否正确
     newdata=$(jq --arg ip "$ip" --arg tag "$tag" --arg uuid "$uuid" --arg user "$user" '.inbound.settings.clients += [{"id":$uuid,"alterId":0,"email":$user}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}] | .routing.rules += [{"type":"field","user":[$user],"outboundTag":$tag}] | .schemaVersion = "3"' <<< "$data") || exit 1 # 检查JSON语法是否正确
