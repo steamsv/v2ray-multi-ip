@@ -14,6 +14,6 @@ for ip in $ip_list; do
     tag="ip"$i""
     data=$(cat /usr/local/etc/v2ray/config.json)
     
-    newdata=$(jq -r --arg ip "$ip" --arg tag "$tag" '.inbound.settings.clients += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}]' '.outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}]' <<< "$data")
+    newdata=$(jq -r --arg ip "$ip" --arg tag "$tag" '.inbound.settings.clients += [{"sendThrough":ip,"protocol":"freedom","tag":tag}] | .outboundDetour += [{"sendThrough":ip,"protocol":"freedom","tag":tag}]' <<< "$data")
     echo "$newdata" > /usr/local/etc/v2ray/config.json
 done
