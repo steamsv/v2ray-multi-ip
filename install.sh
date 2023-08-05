@@ -7,11 +7,13 @@ else
     chmod +x /usr/bin/ssserver
     mkdir /etc/ss
 fi
-if command -v iptables >/dev/null; then
+if command -v iptables >/dev/null 2>&1; then
     echo "ipables-service已经安装"
 else
     echo "ipables-service未安装，将进行安装"
     yum install iptables-services -y
+    systemctl start iptables  #启动
+    systemctl enable iptables  #开机启动
 fi
 # 检查 joker 是否已经安装
 if command -v joker >/dev/null 2>&1; then
