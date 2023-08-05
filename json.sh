@@ -5,6 +5,7 @@ if command -v v2ray >/dev/null 2>&1; then
 else
     echo "V2ray未安装，将进行安装"
     curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh | bash
+    systemctl enable v2ray
 fi
 # 检查 jq 是否已经安装
 if hash jq 2>/dev/null; then
@@ -39,5 +40,6 @@ for ip in $ip_list; do
     encoded_string=$(echo -n "$string" | base64)
     result="vmess://$encoded_string"
     result=$(echo -n "$result" | tr -d '\n')
-echo "$result"
+    echo "$result"
 done
+systemctl restart v2ray
