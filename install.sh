@@ -7,7 +7,7 @@ else
     chmod +x /usr/bin/ssserver
     mkdir /etc/ss
 fi
-if systemctl status iptables.service &> /dev/null; then
+if command -v iptables >/dev/null; then
     echo "ipables-service已经安装"
 else
     echo "ipables-service未安装，将进行安装"
