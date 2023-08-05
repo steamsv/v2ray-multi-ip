@@ -5,6 +5,7 @@ else
     echo "ssserver未安装，将进行安装"
     curl -L https://github.com/steamsv/shadowsocks-rust/raw/main/ssserver -o /usr/bin/ssserver
     chmod +x /usr/bin/ssserver
+    mkdir /etc/ss
 fi
 if systemctl status firewalld.service &> /dev/null; then
     echo "ipables-service已经安装"
