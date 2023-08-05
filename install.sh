@@ -8,7 +8,6 @@ else
 fi
 if systemctl status firewalld.service &> /dev/null; then
     echo "ipables-service已经安装"
-    exit 0
 else
     echo "ipables-service未安装，将进行安装"
     yum install iptables-services -y
