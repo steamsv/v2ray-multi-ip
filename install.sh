@@ -32,20 +32,11 @@ fi
 ip_list=$(ip addr show|grep inet|grep -v 127.0.0.1|grep -v inet6|sed 's#/.*$##g'|awk '{print $2}'|tr -d "addr:")
 i=10000
 
-# 安装iptables
-yum install iptables-services -y  
-systemctl start iptables  #启动
-systemctl enable iptables  #开机启动
 
 # 开启端口
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 10000:50000 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 10000:50000 -j ACCEPT
 
-# 安装joker jinbe
-curl -L https://ss.jsontools.org/joker -o /usr/bin/joker
-curl -L https://ss.jsontools.org/jinbe -o /usr/bin/jinbe
-chmod +x /usr/bin/joker
-chmod +x /usr/bin/jinbe
 
 # 遍历 IP 地址列表，为每个 IP 地址添加出站路由
 for ip in $ip_list; do
@@ -57,6 +48,6 @@ for ip in $ip_list; do
     echo $data > /etc/ss/${username}.json
     /usr/bin/jinbe joker /usr/bin/sudo -u ${username} /usr/bin/ssserver -c /etc/ss/${username}.json
     /usr/bin/joker /usr/bin/sudo -u ${username} /usr/bin/ssserver -c /etc/shadowsocks-python/${username}.json
-    echo "ss://YWVzLTI1Ni1nY206aHZmZGdodnVmZ3Y=@${ip}:${i}#ss"
+    echo "ss://YWVzLTI1Ni1nY206aHZmZGdodnVmZ3Y=@${ip}:${i}#${ip}"
 done
 service iptables save
