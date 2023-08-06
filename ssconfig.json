@@ -1,27 +1,22 @@
 {
-    "inbound": {
-        "allocate": {
-            "strategy": "always"
-        },
-        "listen": "0.0.0.0",
-        "port": 8090,
-        "protocol": "shadowsocks",
-        "settings": {
-            "clients": []
-        },
-        "tag": "proxy"
+    "inbound":[
+
+    ],
+    "log":{
+        "access":"none",
+        "error":"none",
+        "loglevel":"none"
     },
-    "log": {
-        "access": "none",
-        "error": "none",
-        "loglevel": "none"
+    "outbound":{
+        "protocol":"freedom"
     },
-    "outbound": {
-        "protocol": "freedom"
-    },
-    "outboundDetour": [],
-    "routing": {
-        "domainStrategy": "AsIs",
-        "rules": []
+    "outboundDetour":[
+
+    ],
+    "routing":{
+        "domainStrategy":"AsIs",
+        "rules":[
+
+        ]
     }
 }
