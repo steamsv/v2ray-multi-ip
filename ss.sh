@@ -32,7 +32,8 @@ ip_list=$(ip addr show|grep inet|grep -v 127.0.0.1|grep -v inet6|sed 's#/.*$##g'
 # 为每个IP地址添加出站路由
 for ip in $ip_list; do
     i=$((i+1))
-    tag="ip"$i""
+    n=$((n+1))
+    tag="ip"$n""
     uuid=$(uuidgen)
     user="user"$i"@v2ray.com"
     
