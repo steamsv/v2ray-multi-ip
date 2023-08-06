@@ -37,7 +37,7 @@ for ip in $ip_list; do
     user="user"$i"@v2ray.com"
     
     data=$(cat /usr/local/etc/v2ray/config.json) || exit 1 # 检查JSON语法是否正确
-    newdata=$(jq --arg ip "$ip" --arg tag "$tag" --arg uuid "$uuid" --arg user "$user" --arg i "$i" '.inbound += [{"allocate":{"strategy":"always"},"listen":"0.0.0.0","port":$i,"protocol":"shadowsocks","settings":{"clients":[{"email":$user,"method":"aes-256-gcm","password":"hvfdghvufgv","level":0,"network":"tcp,udp"}]}}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}] | .routing.rules += [{"type":"field","user":[$user],"outboundTag":$tag}]' <<< "$data") || exit 1 # 检查JSON语法是否正确
+    newdata=$(jq --arg ip "$ip" --arg tag "$tag" --arg uuid "$uuid" --arg user "$user" --arg i "$i" '.inbound += [{"listen":"0.0.0.0","email":$user,"port":$i,"protocol":"shadowsocks","settings":{"method":"aes-256-gcm","password":"hvfdghvufgv","network":"tcp,udp"}}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}] | .routing.rules += [{"type":"field","user":[$user],"outboundTag":$tag}]' <<< "$data") || exit 1 # 检查JSON语法是否正确
     echo "$newdata" > /usr/local/etc/v2ray/config.json || exit 1 # 检查写入是否成功
     echo "ss://YWVzLTI1Ni1nY206aHZmZGdodnVmZ3Y=@${ip}:${i}#ss"
 done
