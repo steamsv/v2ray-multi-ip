@@ -37,9 +37,7 @@ for ip in $ip_list; do
     newdata=$(jq --arg ip "$ip" --arg tag "$tag" --arg uuid "$uuid" --arg user "$user" '.inbound.settings.clients += [{"email":"$user","method":"aes-256-gcm","password":"hvfdghvufgv","level":0,"network":"tcp,udp"}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}] | .routing.rules += [{"type":"field","user":[$user],"outboundTag":$tag}]' <<< "$data") || exit 1 # 检查JSON语法是否正确
     echo "$newdata" > /usr/local/etc/v2ray/config.json || exit 1 # 检查写入是否成功
     string="{\"add\":\"$ip\",\"aid\":\"0\",\"alpn\":\"\",\"fp\":\"\",\"host\":\"\",\"id\":\"$uuid\",\"net\":\"ws\",\"path\":\"ws\",\"port\":\"8090\",\"ps\":\"$ip\",\"scy\":\"auto\",\"sni\":\"\",\"tls\":\"\",\"type\":\"\",\"v\":\"2\"}"
-    encoded_string=$(echo -n "$string" | base64)
-    result="vmess://$encoded_string"
-    result=$(echo -n "$result" | tr -d '\n')
+    echo "ss://YWVzLTI1Ni1nY206aHZmZGdodnVmZ3Y=@${ip}:8090#ss"
     echo "$result"
 done
 systemctl restart v2ray
