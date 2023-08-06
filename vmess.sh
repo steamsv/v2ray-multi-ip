@@ -20,7 +20,7 @@ fi
 # 删除旧的配置文件
 rm -f /usr/local/etc/v2ray/config.json
 # 下载新的配置文件
-if ! curl -L https://raw.githubusercontent.com/steamsv/v2ray-multi-ip/main/newconfig.json -o /usr/local/etc/v2ray/config.json; then
+if ! curl -L https://raw.githubusercontent.com/steamsv/v2ray-multi-ip/main/vmessconfig.json -o /usr/local/etc/v2ray/config.json; then
     echo "下载新的配置文件失败" >&2
     exit 1
 fi
