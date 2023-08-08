@@ -1,0 +1,22 @@
+{
+    "inbounds":[
+
+    ],
+    "log":{
+        "access":"none",
+        "error":"none",
+        "loglevel":"none"
+    },
+    "outbound":{
+        "protocol":"freedom"
+    },
+    "outboundDetour":[
+
+    ],
+    "routing":{
+        "domainStrategy":"AsIs",
+        "rules":[
+
+        ]
+    }
+}
