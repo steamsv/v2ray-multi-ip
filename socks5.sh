@@ -34,9 +34,10 @@ for ip in $ip_list; do
     i=$((i+1))
     n=$((n+1))
     tag="ip"$n""
-    
+    user=$(LC_ALL=C tr -dc '0-9' < /dev/urandom | head -c8)
+    pass=$(LC_ALL=C tr -dc '0-9' < /dev/urandom | head -c8)
     data=$(cat /usr/local/etc/v2ray/config.json) || exit 1 # 检查JSON语法是否正确
-    newdata=$(jq --arg ip "$ip" --arg tag "$tag" --arg uuid "$uuid" --arg i "$i" '.inbounds += [{"tag":$tag,"port":$i,"listen":"0.0.0.0","protocol":"shadowsocks","settings":{"method":"aes-256-gcm","password":"hvfdghvufgv","network":"tcp,udp"},"sniffing":{"enabled":true,"destOverride":["http","tls"]}}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}] | .routing.rules += [{"type":"field","inboundTag":[$tag],"outboundTag":$tag}]' <<< "$data") || exit 1 # 检查JSON语法是否正确
+    newdata=$(jq --arg ip "$ip" --arg tag "$tag" --arg i "$i" --arg user "$user" --arg pass "$pass" '.inbounds += [{"tag":$tag,"port":$i,"listen":"0.0.0.0","protocol":"shadowsocks","settings":{"method":"aes-256-gcm","password":"hvfdghvufgv","network":"tcp,udp"},"sniffing":{"enabled":true,"destOverride":["http","tls"]}}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}] | .routing.rules += [{"type":"field","inboundTag":[$tag],"outboundTag":$tag}]' <<< "$data") || exit 1 # 检查JSON语法是否正确
     echo "$newdata" > /usr/local/etc/v2ray/config.json || exit 1 # 检查写入是否成功
     echo "ss://YWVzLTI1Ni1nY206aHZmZGdodnVmZ3Y=@${ip}:${i}#ss"
 done
