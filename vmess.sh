@@ -30,7 +30,7 @@ ip_list=$(ip addr show|grep inet|grep -v 127.0.0.1|grep -v inet6|sed 's#/.*$##g'
 for ip in $ip_list; do
     i=$((i+1))
     tag="ip"$i""
-    uuid=$(uuidgen)
+    uuid=$(cat /proc/sys/kernel/random/uuid)
     user="user"$i"@v2ray.com"
     
     data=$(cat /usr/local/etc/v2ray/config.json) || exit 1 # 检查JSON语法是否正确
