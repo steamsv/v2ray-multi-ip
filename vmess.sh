@@ -42,8 +42,8 @@ for ip in $ip_list; do
     encoded_string=$(echo -n "$string" | base64)
     result="vmess://$encoded_string"
     result=$(echo -n "$result" | tr -d '\n')
-    echo "$ip"
     echo "$result"
 done
+echo "${ip_list[*]}"
 systemctl restart v2ray
 systemctl enable v2ray
