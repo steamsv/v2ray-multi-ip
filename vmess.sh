@@ -24,6 +24,8 @@ if ! curl -L https://raw.githubusercontent.com/steamsv/v2ray-multi-ip/main/vmess
     echo "下载新的配置文件失败" >&2
     exit 1
 fi
+
+read -p "输入地区ID" id
 # 获取服务器IP地址列表
 ip_list=$(ip addr show|grep inet|grep -v 127.0.0.1|grep -v inet6|sed 's#/.*$##g'|awk '{print $2}'|tr -d "addr:")
 # 为每个IP地址添加出站路由
@@ -36,7 +38,7 @@ for ip in $ip_list; do
     data=$(cat /usr/local/etc/v2ray/config.json) || exit 1 # 检查JSON语法是否正确
     newdata=$(jq --arg ip "$ip" --arg tag "$tag" --arg uuid "$uuid" --arg user "$user" '.inbound.settings.clients += [{"id":$uuid,"alterId":0,"email":$user}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}] | .routing.rules += [{"type":"field","user":[$user],"outboundTag":$tag}]' <<< "$data") || exit 1 # 检查JSON语法是否正确
     echo "$newdata" > /usr/local/etc/v2ray/config.json || exit 1 # 检查写入是否成功
-    string="{\"add\":\"$ip\",\"aid\":\"0\",\"alpn\":\"\",\"fp\":\"\",\"host\":\"\",\"id\":\"$uuid\",\"net\":\"ws\",\"path\":\"ws\",\"port\":\"8090\",\"ps\":\"$ip\",\"scy\":\"auto\",\"sni\":\"\",\"tls\":\"\",\"type\":\"\",\"v\":\"2\"}"
+    string="{\"add\":\"$ip\",\"aid\":\"0\",\"alpn\":\"\",\"fp\":\"\",\"host\":\"\",\"id\":\"$uuid\",\"net\":\"ws\",\"path\":\"ws\",\"port\":\"8090\",\"ps\":\"$id$ip\",\"scy\":\"auto\",\"sni\":\"\",\"tls\":\"\",\"type\":\"\",\"v\":\"2\"}"
     encoded_string=$(echo -n "$string" | base64)
     result="vmess://$encoded_string"
     result=$(echo -n "$result" | tr -d '\n')
