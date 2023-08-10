@@ -34,7 +34,7 @@ for ip in $ip_list; do
     tag="ip"$i""
     uuid=$(cat /proc/sys/kernel/random/uuid)
     user="user"$i"@v2ray.com"
-    iduser=""$id"$ip""
+    iduser=""$id""$ip""
     data=$(cat /usr/local/etc/v2ray/config.json) || exit 1 # 检查JSON语法是否正确
     newdata=$(jq --arg ip "$ip" --arg tag "$tag" --arg uuid "$uuid" --arg user "$user" '.inbound.settings.clients += [{"id":$uuid,"alterId":0,"email":$user}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}] | .routing.rules += [{"type":"field","user":[$user],"outboundTag":$tag}]' <<< "$data") || exit 1 # 检查JSON语法是否正确
     echo "$newdata" > /usr/local/etc/v2ray/config.json || exit 1 # 检查写入是否成功
