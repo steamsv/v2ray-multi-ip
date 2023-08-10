@@ -25,7 +25,7 @@ if ! curl -L https://raw.githubusercontent.com/steamsv/v2ray-multi-ip/main/vmess
     exit 1
 fi
 
-read -p "输入地区ID" id
+read -p "输入地区ID：" id
 # 获取服务器IP地址列表
 ip_list=$(ip addr show|grep inet|grep -v 127.0.0.1|grep -v inet6|sed 's#/.*$##g'|awk '{print $2}'|tr -d "addr:")
 # 为每个IP地址添加出站路由
