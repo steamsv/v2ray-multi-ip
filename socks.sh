@@ -5,7 +5,7 @@ if command -v v2ray >/dev/null 2>&1; then
 else
     echo "V2ray未安装，将进行安装"
     curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh | bash
-    systemctl enable v2ray
+    
 fi
 # 检查 jq 是否已经安装
 if hash jq 2>/dev/null; then
@@ -39,6 +39,7 @@ for ip in $ip_list; do
     data=$(cat /usr/local/etc/v2ray/config.json) || exit 1 # 检查JSON语法是否正确
     newdata=$(jq --arg ip "$ip" --arg tag "$tag" --arg i "$i" --arg user "$user" --arg pass "$pass" '.inbounds += [{"tag":$tag,"port":$i,"listen":"0.0.0.0","protocol":"socks","settings":{"auth":"password","accounts":[{"user":$user,"pass":$pass}],"udp":true,"ip":"127.0.0.1","userLevel":0},"sniffing":{"enabled":true,"destOverride":["http","tls"]}}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}] | .routing.rules += [{"type":"field","inboundTag":[$tag],"outboundTag":$tag}]' <<< "$data") || exit 1 # 检查JSON语法是否正确
     echo "$newdata" > /usr/local/etc/v2ray/config.json || exit 1 # 检查写入是否成功
-    echo "ss://YWVzLTI1Ni1nY206aHZmZGdodnVmZ3Y=@${ip}:${i}#ss"
+    echo "SOCKS5:${ip}:${i}:${USER}:${PASS}"
 done
 systemctl restart v2ray
+systemctl enable v2ray
