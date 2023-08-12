@@ -36,7 +36,7 @@ for ip in $ip_list; do
     tag="ip"${n}""
     pass=$(head /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 10 ; echo '')
     data=$(cat /usr/local/etc/v2ray/config.json) || exit 1 # 检查JSON语法是否正确
-    newdata=$(jq --arg ip "$ip" --arg tag "$tag" --arg uuid "$uuid" --arg i "$i" '.inbounds += [{"tag":$tag,"port":$i,"listen":"0.0.0.0","protocol":"shadowsocks","settings":{"method":"aes-256-gcm","password":"hvfdghvufgv","network":"tcp,udp"},"sniffing":{"enabled":true,"destOverride":["http","tls"]}}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}] | .routing.rules += [{"type":"field","inboundTag":[$tag],"outboundTag":$tag}]' <<< "$data") || exit 1 # 检查JSON语法是否正确
+    newdata=$(jq --arg ip "$ip" --arg tag "$tag" --arg uuid "$uuid" --arg i "$i" --arg pass "$pass" '.inbounds += [{"tag":$tag,"port":$i,"listen":"0.0.0.0","protocol":"shadowsocks","settings":{"method":"aes-256-gcm","password":$pass,"network":"tcp,udp"},"sniffing":{"enabled":true,"destOverride":["http","tls"]}}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}] | .routing.rules += [{"type":"field","inboundTag":[$tag],"outboundTag":$tag}]' <<< "$data") || exit 1 # 检查JSON语法是否正确
     echo "$newdata" > /usr/local/etc/v2ray/config.json || exit 1 # 检查写入是否成功
     string="aes-256-gcm:${pass}"
     encoded_string=$(echo -n "${string}" | base64)
