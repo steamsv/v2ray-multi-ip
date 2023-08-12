@@ -43,6 +43,7 @@ for ip in $ip_list; do
     result="vmess://${encoded_string}"
     result="ss://${encoded_string}=@${ip}:${i}#${id}${ip}"
     result=$(echo -n "${result}" | tr -d '\n')
+    echo "${result}"
 done
 echo "${ip_list[*]}"
 systemctl restart v2ray
