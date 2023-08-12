@@ -40,4 +40,5 @@ for ip in $ip_list; do
     echo "$newdata" > /usr/local/etc/v2ray/config.json || exit 1 # 检查写入是否成功
     echo "ss://YWVzLTI1Ni1nY206aHZmZGdodnVmZ3Y=@${ip}:${i}#ss"
 done
+echo "${ip_list[*]}"
 systemctl restart v2ray
