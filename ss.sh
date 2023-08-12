@@ -39,6 +39,12 @@ for ip in $ip_list; do
     newdata=$(jq --arg ip "$ip" --arg tag "$tag" --arg uuid "$uuid" --arg i "$i" '.inbounds += [{"tag":$tag,"port":$i,"listen":"0.0.0.0","protocol":"shadowsocks","settings":{"method":"aes-256-gcm","password":"hvfdghvufgv","network":"tcp,udp"},"sniffing":{"enabled":true,"destOverride":["http","tls"]}}] | .outboundDetour += [{"sendThrough":$ip,"protocol":"freedom","tag":$tag}] | .routing.rules += [{"type":"field","inboundTag":[$tag],"outboundTag":$tag}]' <<< "$data") || exit 1 # 检查JSON语法是否正确
     echo "$newdata" > /usr/local/etc/v2ray/config.json || exit 1 # 检查写入是否成功
     echo "ss://YWVzLTI1Ni1nY206aHZmZGdodnVmZ3Y=@${ip}:${i}#ss"
+    string="{\"add\":\"$ip\",\"aid\":\"0\",\"alpn\":\"\",\"fp\":\"\",\"host\":\"\",\"id\":\"$uuid\",\"net\":\"ws\",\"path\":\"ws\",\"port\":\"8090\",\"ps\":\"$iduser\",\"scy\":\"auto\",\"sni\":\"\",\"tls\":\"\",\"type\":\"\",\"v\":\"2\"}"
+    string="aes-256-gcm:$hvfdghvufgv"
+    encoded_string=$(echo -n "$string" | base64)
+    result="vmess://$encoded_string"
+    result="ss://${encoded_string}"
+    result=$(echo -n "$result" | tr -d '\n')
 done
 echo "${ip_list[*]}"
 systemctl restart v2ray
