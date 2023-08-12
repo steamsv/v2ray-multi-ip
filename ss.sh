@@ -24,7 +24,7 @@ if ! curl -L https://raw.githubusercontent.com/steamsv/v2ray-multi-ip/main/sscon
     echo "下载新的配置文件失败" >&2
     exit 1
 fi
-
+read -p "输入地区ID：" id
 # 定义初始端口
 i=10000
 # 获取服务器IP地址列表
